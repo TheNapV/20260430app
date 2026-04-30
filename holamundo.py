@@ -1,7 +1,7 @@
 from flask import Flask, jsonify
 from flask_cors import CORS 
 import numpy as np
-import tensorflow as tf
+import tflite_runtime.interpreter as tflite
 # ========================= # CONFIG
 # =========================
 MODEL_PATH = "model_c2f.tflite"
@@ -11,7 +11,7 @@ CORS(app) # <-- HABILITA CORS
 # LOAD TFLITE MODEL
 # =========================
  
-interpreter = tf.lite.Interpreter(model_path=MODEL_PATH)
+interpreter = tflite.Interpreter(model_path=MODEL_PATH)
 interpreter.allocate_tensors()
 input_details = interpreter.get_input_details()
 output_details = interpreter.get_output_details() # =========================
